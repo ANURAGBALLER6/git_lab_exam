@@ -1,0 +1,52 @@
+DOCTYPE html>
+<html>
+<head>
+  <title>Saved Checks</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container" id="pdf-content" style="padding: 20px; border: 1px solid #ccc;">
+  <h2>Saved Checks for {{ account_name }}</h2>
+
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+    <thead>
+      <tr>
+        <th>Check Name</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Health Check 1</td>
+        <td>2025-05-14</td>
+      </tr>
+      <tr>
+        <td>Health Check 2</td>
+        <td>2025-05-13</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Export Button -->
+<button onclick="downloadPDF()" 
+        style="margin-top: 20px; background-color:#2ecc71; border:none; color:white; padding:8px 16px; border-radius:6px;">
+  Export
+</button>
+
+<script>
+  function downloadPDF() {
+    const element = document.getElementById('pdf-content');
+    html2pdf().from(element).set({
+      margin: 1,
+      filename: 'Saved_Checks.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }).save();
+  }
+</script>
+
+</body>
+</html>
